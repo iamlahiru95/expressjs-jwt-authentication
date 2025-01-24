@@ -1,0 +1,28 @@
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "username": "Lahiru"
+}
+
+###
+
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFoaXJ1IiwiaWF0IjoxNzM3NzM4OTIwLCJleHAiOjE3Mzc3Mzg5NTB9.oDYFDE11gZUanq-66CqzaAcVEvhfZxKxwE3yCt0OMeQ
+
+###
+
+POST http://localhost:3001/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFoaXJ1IiwiaWF0IjoxNzM3NzM4ODg2fQ.kY0-bHMQBF5GSXhheAj6rUV3LxXKp7OYOKhFsUkN3tE"
+}
+
+###
+DELETE http://localhost:3001/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFoaXJ1IiwiaWF0IjoxNzM3NzM4ODg2fQ.kY0-bHMQBF5GSXhheAj6rUV3LxXKp7OYOKhFsUkN3tE"
+}
