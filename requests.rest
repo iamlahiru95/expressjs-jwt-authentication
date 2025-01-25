@@ -2,7 +2,8 @@ POST http://localhost:3001/login
 Content-Type: application/json
 
 {
-    "username": "Lahiru"
+    "username": "Lahiru",
+    "password": "1"
 }
 
 ###
@@ -25,4 +26,14 @@ Content-Type: application/json
 
 {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFoaXJ1IiwiaWF0IjoxNzM3NzM4ODg2fQ.kY0-bHMQBF5GSXhheAj6rUV3LxXKp7OYOKhFsUkN3tE"
+}
+
+###
+
+POST  http://localhost:3001/signup
+Content-Type: application/json
+
+{
+    "username": "lahirus250000",
+    "password": "1"
 }
