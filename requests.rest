@@ -2,8 +2,8 @@ POST http://localhost:3001/login
 Content-Type: application/json
 
 {
-    "username": "Lahiru",
-    "password": "1"
+    "username": "lahirus250",
+    "password": "lahirus250"
 }
 
 ###
@@ -25,7 +25,7 @@ DELETE http://localhost:3001/logout
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFoaXJ1IiwiaWF0IjoxNzM3NzM4ODg2fQ.kY0-bHMQBF5GSXhheAj6rUV3LxXKp7OYOKhFsUkN3tE"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibGFoaXJ1czI1MCIsImlhdCI6MTczNzgzNTQ1NH0.8OhcGVmzU_7jRnRK3p9Kn0pEDhxkb7e1tBPP0ACX4Wo"
 }
 
 ###
@@ -34,6 +34,6 @@ POST  http://localhost:3001/signup
 Content-Type: application/json
 
 {
-    "username": "lahirus250000",
-    "password": "1"
+    "username": "lahirus250",
+    "password": "lahirus250"
 }

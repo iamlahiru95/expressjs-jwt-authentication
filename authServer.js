@@ -2,7 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import { saveToken, isTokenValid } from "./cache/cacheService.js";
+import { saveToken, isTokenValid, removeToken } from "./cache/cacheService.js";
 import {
   fetchHashedPassowrd,
   isUsernameExists,
@@ -13,15 +13,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-let refreshTokens = [];
-
 /**
  * create new access token
  */
 app.post("/token", (req, res) => {
   const refreshToken = req.body.token;
   if (refreshToken == null) return res.sendStatus(401);
-  if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+  if (!isTokenValid(refreshToken)) return res.sendStatus(403);
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
     const accessToken = generateAccessToken({ name: user.name });
@@ -32,9 +30,17 @@ app.post("/token", (req, res) => {
 /**
  * delete refresh token
  */
-app.delete("/logout", (req, res) => {
-  refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
-  res.sendStatus(204);
+app.delete("/logout", async (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.sendStatus(400);
+  }
+  try {
+    await removeToken(token);
+    res.sendStatus(204);
+  } catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 /**
@@ -83,10 +89,7 @@ app.post("/login", async (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 
-    // TODO implement redish cache layer to save refresh tokens
-    // await saveToken(username, refreshToken);
-
-    refreshTokens.push(refreshToken);
+    await saveToken(refreshToken);
     return res.json({ accessToken, refreshToken });
   } catch (error) {
     console.error("Login failed. " + error);
